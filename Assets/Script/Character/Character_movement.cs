@@ -53,7 +53,28 @@ public class Character_movement : MonoBehaviour {
             }
         }else
         {
-            return 0;
+            if (spin_vel>max_spin_vel)
+            {
+                if (l_input)
+                {
+                    return -Time.deltaTime;
+                }else
+                {
+                    return 0;
+                }
+            }else if (spin_vel < -max_spin_vel)
+            {
+                if (r_input)
+                {
+                    return Time.deltaTime;
+                }else
+                {
+                    return 0;
+                }
+            }else
+            {
+                return 0;
+            }
         }
         
     }
@@ -75,7 +96,22 @@ public class Character_movement : MonoBehaviour {
         }
         else
         {
-            return 0;
+            if(r_input && l_input)
+            {
+                float cur_vel = rbody.velocity.magnitude;
+                float expected_vel = (rbody.velocity + Time.deltaTime * transform.up).magnitude;
+                //when expected velocity value decreases
+                if (cur_vel >= expected_vel)
+                {
+                    return Time.deltaTime;
+                }else//when expected velocity value increases
+                {
+                    return 0;
+                }
+            }else
+            {
+                return 0;
+            }
         }
     }
 
