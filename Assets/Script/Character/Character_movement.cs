@@ -22,8 +22,13 @@ public class Character_movement : MonoBehaviour {
 	void Update () {
         bool r_input = Input.GetButton("right_thrust");
         bool l_input = Input.GetButton("left_thrust");
+        Debug.Log(Add_Thrust(r_input, l_input));
+        Debug.Log(new Vector3(0,0,10f)* Add_Thrust(r_input, l_input));
         rbody.angularVelocity += new Vector3(0,0, Add_Spin(r_input, l_input));
+        spin_vel = rbody.angularVelocity.z;
         rbody.velocity += transform.up * Add_Thrust(r_input, l_input);
+        thrust_vel = rbody.velocity.magnitude;
+        
         //rbody.AddForceAtPosition(right_thrust * transform.up, transform.position + transform.right);
         //rbody.AddForceAtPosition(left_thrust * transform.up, transform.position - transform.right);
         //Debug.Log(right_thrust);
@@ -85,12 +90,14 @@ public class Character_movement : MonoBehaviour {
         {
             if (r_input && l_input)
             {
+                Debug.Log("1");
                 //thrust
                 return Time.deltaTime;
 
             }
             else
             {
+                Debug.Log("2");
                 return 0;
             }
         }
@@ -98,6 +105,7 @@ public class Character_movement : MonoBehaviour {
         {
             if(r_input && l_input)
             {
+                Debug.Log("3");
                 float cur_vel = rbody.velocity.magnitude;
                 float expected_vel = (rbody.velocity + Time.deltaTime * transform.up).magnitude;
                 //when expected velocity value decreases
@@ -110,6 +118,7 @@ public class Character_movement : MonoBehaviour {
                 }
             }else
             {
+                Debug.Log("4");
                 return 0;
             }
         }
