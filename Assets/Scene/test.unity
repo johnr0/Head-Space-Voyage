@@ -240,6 +240,7 @@ GameObject:
   - component: {fileID: 844602581}
   - component: {fileID: 844602580}
   - component: {fileID: 844602584}
+  - component: {fileID: 844602585}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -303,7 +304,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 844602579}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -318,6 +319,18 @@ Skybox:
   m_GameObject: {fileID: 844602579}
   m_Enabled: 1
   m_CustomSkybox: {fileID: 2100000, guid: 1a9728aa908b54f0b9558667655d45ed, type: 2}
+--- !u!114 &844602585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 844602579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e04fab819fe04400f888f7555869ef44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FollowingTransform: {fileID: 745143275}
 --- !u!1 &1359145950
 GameObject:
   m_ObjectHideFlags: 0
