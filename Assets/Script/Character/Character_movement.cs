@@ -5,6 +5,7 @@ using UnityEngine;
 public class Character_movement : MonoBehaviour {
     private float right_thrust,left_thrust;
     private Rigidbody rbody;
+
 	// Use this for initialization
 	void Start () {
         right_thrust = 0f;
