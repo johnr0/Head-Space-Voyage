@@ -8,6 +8,7 @@ public class Character_movement : MonoBehaviour {
     private float max_thrust_vel;
     private float thrust_vel;
     private Rigidbody rbody;
+
 	// Use this for initialization
 	void Start () {
         max_spin_vel = 10f;
