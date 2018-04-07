@@ -20,13 +20,17 @@ public class Character_movement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        bool r_input = Input.GetButton("right_thrust");
-        bool l_input = Input.GetButton("left_thrust");
-        rbody.angularVelocity += new Vector3(0,0, Add_Spin(r_input, l_input));
-        spin_vel = rbody.angularVelocity.z;
-        rbody.velocity += transform.up * Add_Thrust(r_input, l_input);
-        thrust_vel = rbody.velocity.magnitude;
+        
     }
+
+	void FixedUpdate(){
+		bool r_input = Input.GetButton("right_thrust");
+		bool l_input = Input.GetButton("left_thrust");
+		rbody.angularVelocity = 5f/Time.deltaTime * new Vector3(0,0, Add_Spin(r_input, l_input));
+		spin_vel = rbody.angularVelocity.z;
+		rbody.velocity += 5f*transform.up * Add_Thrust(r_input, l_input);
+		thrust_vel = rbody.velocity.magnitude;
+	}
 
     private float Add_Spin(bool r_input, bool l_input)
     {
