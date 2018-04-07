@@ -16,6 +16,7 @@ public class JUPlayer : Singleton<JUPlayer> {
         }
     }
     private Vector3 relativeBodyPosition;
+    private Quaternion relativeBodyRotation;
     private Rigidbody _prigidbody;
     public Rigidbody prigidbody
     {
@@ -39,6 +40,7 @@ public class JUPlayer : Singleton<JUPlayer> {
 	public void Init()
     {
         relativeBodyPosition = bodyTransform.localPosition;
+        relativeBodyRotation = bodyTransform.localRotation;
     }
 
 	private void Update()
@@ -49,7 +51,7 @@ public class JUPlayer : Singleton<JUPlayer> {
 
 	private void FixedUpdate()
 	{
-        Debug.LogFormat("CurrentVelocity is : {0}. Current Speed is : {1}", prigidbody.velocity, prigidbody.velocity.magnitude);
+        CheckState();
 	}
 
 	public void Eject()
@@ -57,14 +59,30 @@ public class JUPlayer : Singleton<JUPlayer> {
         if (CurrentState != EPlayerState.Inputable)
             return;
         bodyTransform.parent = null;
-        prigidbody.AddForce(Power * transform.forward, ForceMode.Impulse);
-        CurrentState = EPlayerState.NotInputable;
+        Debug.LogFormat("ForceAdd! {0}",Power * transform.up);
+        prigidbody.AddForce(Power * transform.up, ForceMode.Impulse);
     }
 
     public void ReloadBody()
     {
+        Debug.Log("Reloadbody!");
         bodyTransform.parent = transform;
         bodyTransform.localPosition = relativeBodyPosition;
+        bodyTransform.localRotation = relativeBodyRotation;
+        CurrentState = EPlayerState.Inputable;
+    }
+
+    public void CheckState()
+    {
+        Debug.LogFormat("CurrentVelocity is : {0}. Current Speed is : {1}", prigidbody.velocity, prigidbody.velocity.magnitude);
+        if (CurrentState == EPlayerState.Inputable)
+        {
+            if(prigidbody.velocity.magnitude > 0.5f)
+                CurrentState = EPlayerState.NotInputable;
+            return;
+        }
+        if (prigidbody.velocity.magnitude < 0.5f)
+            ReloadBody(); 
     }
 
 }
